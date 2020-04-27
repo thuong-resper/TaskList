@@ -1,0 +1,189 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.container .pdt {
+    padding-top: 30px;
+    justify-content: space-between;
+}
+.mgt-30 {
+    margin-top: 30px;
+}
+.mgb-20 {
+    margin-bottom: 20px;
+}
+.mgb-0 {
+    margin-bottom: 0;
+}
+
+.set1 {
+    background-color: #f2f3f5;
+    border: 1px solid #0000001a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+h2 {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #0000001a;
+    margin: 0;
+}
+
+.btn_1 {
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.col-lg-12 div {
+    padding: 20px 0;
+}
+
+.col-lg-12 h1 {
+    width: 100%;
+    border: 2px solid rgb(117, 117, 117);
+    padding: 20px;
+    margin: 0;
+}
+.bg {
+    background-color: #f2f3f5;
+    border-radius: 8px;
+    height: fit-content;
+}
+.w-100 {
+    width: 100%;
+}
+.fs-15 {
+    font-size: 15px;
+}
+.mgr-10 {
+    margin-right: 10px;
+}
+.mw-500 {
+    max-width: 500px;
+}
+
+.ovh {
+    overflow: hidden;
+}
+.work_title {
+    width: 100%;
+    padding: 20px;
+    margin: 0;
+    border: none !important;
+}
+.panel {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.panel span {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.active {
+    border: 3px solid #00000066;
+}
+.col-lg-12 span {
+    text-transform: uppercase;
+    padding: 0 15px;
+}
+
+.form-group-mw {
+    max-width: 150px;
+}
+
+.col-lg-12 div {
+    padding: 0;
+}
+
+.btn span {
+    text-align: center;
+    padding: 0;
+    font-weight: 500;
+}
+span.flaticon {
+    font-weight: 900;
+    margin-right: 5px;
+}
+.bg h3 {
+    padding: 15px 0;
+}
+.bg .btn-save {
+    display: flex;
+    justify-content: center;
+}
+.bg button {
+    margin: 20px 5px;
+    text-align: center;
+    width: 105px;
+    border-radius: 20px;
+}
+
+tr th {
+    text-align: center;
+}
+.tableIcon {
+    display: flex;
+    justify-content: center;
+}
+.tableIcon button {
+    width: 44px;
+    margin: 0 5px;
+    border-radius: 25%;
+}
+thead tr th {
+    font-weight: bold !important;
+}
+th:nth-child(1) {
+    width: 10%;
+}
+th:nth-child(2) {
+    word-break: break-all;
+    width: 50%;
+    max-width: 50%;
+    text-align: left;
+    font-weight: normal;
+}
+th:nth-child(3) {
+    width: 20%;
+    font-weight: normal;
+}
+th:nth-child(4) {
+    width: 20%;
+    font-weight: normal;
+}
+
+.btnTable {
+    text-align: center;
+    width: -moz-fit-content !important;
+    margin: 0 !important;
+    font-weight: 500;
+    padding: 5px;
+    border-radius: 5px !important;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header span {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.header span::before {
+    line-height: 30px;
+}
