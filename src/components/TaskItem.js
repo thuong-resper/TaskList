@@ -1,6 +1,15 @@
 import React from "react";
 
 class TaskItem extends React.Component {
+    //Update status
+    onUpdateStatus = () => {
+        this.props.onUpdateStatus(this.props.task.id);
+    };
+    //Delete work
+    onDelete = () => {
+        this.props.onDelete(this.props.task.id);
+    };
+
     render() {
         var { task, index } = this.props;
         return (
@@ -15,6 +24,7 @@ class TaskItem extends React.Component {
                                 ? "btnTable btn btn-danger"
                                 : "btnTable btn btn-info"
                         }
+                        onClick={this.onUpdateStatus}
                     >
                         {task.status === true ? "Finished" : "Unfinished"}
                     </button>
@@ -33,6 +43,7 @@ class TaskItem extends React.Component {
                             type="button"
                             className="btn btn-danger"
                             title="Delete"
+                            onClick={this.onDelete}
                         >
                             <span className="flaticon-cancel flaticon"></span>
                         </button>

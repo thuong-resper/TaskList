@@ -18,27 +18,6 @@ class App extends React.Component {
         };
     }
 
-    generateData = () => {
-        var tasks = [
-            {
-                id: this.generateId(),
-                name: "Check Mail",
-                status: true,
-            },
-            {
-                id: this.generateId(),
-                name: "Check Social Media",
-                status: false,
-            },
-            {
-                id: this.generateId(),
-                name: "sdwe",
-                status: true,
-            },
-        ];
-        localStorage.setItem("tasks", JSON.stringify(tasks)); //save data by json
-    };
-
     componentDidMount() {
         if (localStorage && localStorage.getItem("tasks")) {
             var tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -64,16 +43,82 @@ class App extends React.Component {
             this.id()
         );
     }
+    //toggle display form
     toggleForm = () => {
         this.setState({
             isDisplayForm: !this.state.isDisplayForm,
         });
     };
 
+    //close form when click icon close button
     onCloseForm = () => {
         this.setState({
             isDisplayForm: false,
         });
+    };
+
+    onSubmit = (data) => {
+        let { tasks } = this.state; // let tasks = this.state.tasks
+        data.id = this.generateId();
+        tasks.push(data);
+        this.setState({
+            tasks: tasks,
+        });
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+    };
+
+    // Update Status
+    onUpdateStatus = (id) => {
+        let { tasks } = this.state;
+        // 1st way
+
+        // if (findId !== -1) {
+        //     tasks[findId].status = !tasks[findId].status;
+        //     this.setState({
+        //         tasks: tasks,
+        //     });
+        // }
+        // for (let i = 0; i < findId.length; i++) {
+        //     findId[i] = !findId[i];
+        //     // console.log(findId[i]);
+        //     this.setState({
+        //         tasks: tasks,
+        //     });
+        // }
+        // tasks[index].status = !tasks[index].status;
+        // // 2nd way
+
+        // setState and save at local storage
+        let index = this.findIndex(id);
+        if (index !== -1) {
+            tasks[index].status = !tasks[index].status;
+            this.setState({
+                tasks: tasks,
+            });
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+    };
+
+    findIndex = (id) => {
+        let { tasks } = this.state;
+        let result = -1;
+        tasks.forEach((task, index) => {
+            if (task.id === id) {
+                result = index;
+            }
+        });
+        return result;
+    };
+
+    // Delete Work
+    onDelete = (id) => {
+        const { tasks } = this.state;
+
+        let filterResult = tasks.filter((task) => task.id !== id);
+        this.setState({
+            tasks: filterResult,
+        });
+        localStorage.setItem("tasks", JSON.stringify(filterResult));
     };
 
     render() {
@@ -81,7 +126,7 @@ class App extends React.Component {
 
         //Condition for display Task Form
         var elementTaskForm = isDisplayForm ? (
-            <TaskForm onCloseForm={this.onCloseForm} />
+            <TaskForm onCloseForm={this.onCloseForm} onSubmit={this.onSubmit} />
         ) : (
             ""
         );
@@ -89,7 +134,7 @@ class App extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
-                        <h1 className="work_title bg text-center">
+                        <h1 className="work_title text-center">
                             Work Management
                         </h1>
                     </div>
@@ -97,19 +142,13 @@ class App extends React.Component {
 
                 {/* Control has Search and Sort */}
 
-                <div className="row">
+                <div className="row mgt-30">
                     {/* Task Form */}
-                    <div className={isDisplayForm ? "col-lg-4 bg mgt-30" : ""}>
+                    <div className={isDisplayForm ? "col-lg-4 bg tran-5" : ""}>
                         {elementTaskForm}
                     </div>
                     {/* Task List */}
-                    <div
-                        className={
-                            isDisplayForm
-                                ? "col-lg-8 mgt-30"
-                                : "col-lg-12 mgt-30"
-                        }
-                    >
+                    <div className={isDisplayForm ? "col-lg-8" : "col-lg-12"}>
                         <button
                             type="button"
                             className="btn btn-info mgb-20 mgr-10"
@@ -118,17 +157,15 @@ class App extends React.Component {
                             <span className="flaticon-add-1 flaticon"></span>
                             <span>Add new work</span>
                         </button>
-                        <button
-                            type="button"
-                            className="btn btn-danger mgb-20"
-                            onClick={this.generateData}
-                        >
-                            <span className="flaticon-add-1 flaticon"></span>
-                            <span>Generate Data</span>
-                        </button>
+
                         <Control />
 
-                        <TaskList tasks={tasks} isDisplayForm={isDisplayForm} />
+                        <TaskList
+                            tasks={tasks}
+                            // isDisplayForm={isDisplayForm}
+                            onUpdateStatus={this.onUpdateStatus}
+                            onDelete={this.onDelete}
+                        />
                     </div>
                 </div>
             </div>

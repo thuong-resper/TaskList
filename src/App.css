@@ -1,8 +1,12 @@
 .App {
     font-family: sans-serif;
+    margin: 5px;
     text-align: center;
 }
 
+body {
+    background-color: #f2f3f5;
+}
 .container .pdt {
     padding-top: 30px;
     justify-content: space-between;
@@ -48,7 +52,7 @@ h2 {
     margin: 0;
 }
 .bg {
-    background-color: #f2f3f5;
+    background-color: #fff;
     border-radius: 8px;
     height: fit-content;
 }
@@ -63,6 +67,12 @@ h2 {
 }
 .mw-500 {
     max-width: 500px;
+}
+.pd-15 {
+    padding: 0 15px;
+}
+.pd-0 {
+    padding: 0;
 }
 
 .ovh {
@@ -84,7 +94,6 @@ h2 {
 .panel span {
     width: 40px;
     height: 40px;
-    margin: 5px;
     cursor: pointer;
     border-radius: 50%;
 }
@@ -129,6 +138,7 @@ span.flaticon {
 
 tr th {
     text-align: center;
+    vertical-align: middle !important;
 }
 .tableIcon {
     display: flex;
@@ -183,7 +193,32 @@ th:nth-child(4) {
     cursor: pointer;
     border-radius: 50%;
     background-color: #fff;
+    transition: 0.4s;
+}
+
+.header span:hover {
+    background-color: rgb(184, 184, 184);
 }
 .header span::before {
     line-height: 30px;
 }
+.tran-5 {
+    /* transition: 0.4s; */
+    animation: forwards 0.5s leftToRight;
+}
+@keyframes leftToRight {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+/* @keyframes leftToRight1 {
+    from {
+        transform: translate(0)
+    }
+    to {
+        transform: translateX(50%);
+    }
+} */

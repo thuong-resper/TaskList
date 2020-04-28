@@ -6,11 +6,19 @@ class TaskList extends React.Component {
     render() {
         var { tasks } = this.props; //var tasks = this.props.tasks
         var elementTasks = tasks.map((task, index) => {
-            return <TaskItem key={task.id} index={index + 1} task={task} />;
+            return (
+                <TaskItem
+                    key={task.id}
+                    index={index + 1}
+                    task={task}
+                    onUpdateStatus={this.props.onUpdateStatus}
+                    onDelete={this.props.onDelete}
+                />
+            );
         });
 
         return (
-            <table className="table bg ovh">
+            <table className="table ovh bg">
                 <thead>
                     <tr>
                         <th scope="col">STT</th>
