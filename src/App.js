@@ -15,6 +15,7 @@ class App extends React.Component {
         this.state = {
             tasks: [],
             isDisplayForm: false,
+            taskEditing: null,
         };
     }
 
@@ -45,9 +46,17 @@ class App extends React.Component {
     }
     //toggle display form
     toggleForm = () => {
-        this.setState({
-            isDisplayForm: !this.state.isDisplayForm,
-        });
+        if (this.state.isDisplayForm && this.state.taskEditing !== null) {
+            this.setState({
+                isDisplayForm: true,
+                taskEditing: null,
+            });
+        } else {
+            this.setState({
+                isDisplayForm: !this.state.isDisplayForm,
+                taskEditing: null,
+            });
+        }
     };
 
     //close form when click icon close button
@@ -57,12 +66,26 @@ class App extends React.Component {
         });
     };
 
+    onShowForm = () => {
+        this.setState({
+            isDisplayForm: true,
+        });
+    };
+
     onSubmit = (data) => {
         let { tasks } = this.state; // let tasks = this.state.tasks
-        data.id = this.generateId();
-        tasks.push(data);
+        if (data.id === "") {
+            //Add and save new work
+            data.id = this.generateId();
+            tasks.push(data);
+        } else {
+            let index = this.findIndex(data.id);
+            tasks[index] = data;
+        }
+
         this.setState({
             tasks: tasks,
+            taskEditing: null,
         });
         localStorage.setItem("tasks", JSON.stringify(tasks));
     };
@@ -110,23 +133,54 @@ class App extends React.Component {
         return result;
     };
 
-    // Delete Work
+    // Delete Work and close form
     onDelete = (id) => {
         const { tasks } = this.state;
 
-        let filterResult = tasks.filter((task) => task.id !== id);
-        this.setState({
-            tasks: filterResult,
-        });
-        localStorage.setItem("tasks", JSON.stringify(filterResult));
+        //1st way
+        // let filterResult = tasks.filter((task) => task.id !== id);
+        // this.setState({
+        //     tasks: filterResult,
+        // });
+        // localStorage.setItem("tasks", JSON.stringify(filterResult));
+        // this.onCloseForm();
+
+        // 2nd way
+        let index = this.findIndex(id);
+        if (index !== -1) {
+            tasks.splice(index, 1);
+            this.setState({
+                tasks: tasks,
+            });
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+        this.onCloseForm();
+    };
+
+    // Update work
+    onUpdate = (id) => {
+        const { tasks } = this.state;
+        let index = this.findIndex(id);
+        this.setState(
+            //setState is asynchronous
+            {
+                taskEditing: tasks[index],
+            }
+            //so if want receive data before do next steps, must make asynchronous to synchronous by use function
+        );
+        this.onShowForm();
     };
 
     render() {
-        var { tasks, isDisplayForm } = this.state; // var tasks = this.state.tasks
+        var { tasks, isDisplayForm, taskEditing } = this.state; // var tasks = this.state.tasks
 
         //Condition for display Task Form
         var elementTaskForm = isDisplayForm ? (
-            <TaskForm onCloseForm={this.onCloseForm} onSubmit={this.onSubmit} />
+            <TaskForm
+                onCloseForm={this.onCloseForm}
+                onSubmit={this.onSubmit}
+                task={taskEditing}
+            />
         ) : (
             ""
         );
@@ -165,6 +219,7 @@ class App extends React.Component {
                             // isDisplayForm={isDisplayForm}
                             onUpdateStatus={this.onUpdateStatus}
                             onDelete={this.onDelete}
+                            onUpdate={this.onUpdate}
                         />
                     </div>
                 </div>

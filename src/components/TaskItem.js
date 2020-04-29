@@ -5,9 +5,15 @@ class TaskItem extends React.Component {
     onUpdateStatus = () => {
         this.props.onUpdateStatus(this.props.task.id);
     };
+
     //Delete work
     onDelete = () => {
         this.props.onDelete(this.props.task.id);
+    };
+
+    //Update work
+    onUpdate = () => {
+        this.props.onUpdate(this.props.task.id);
     };
 
     render() {
@@ -36,6 +42,7 @@ class TaskItem extends React.Component {
                             type="button"
                             className="btn btn-info"
                             title="Edit"
+                            onClick={this.onUpdate}
                         >
                             <span className="flaticon-edit flaticon"></span>
                         </button>
