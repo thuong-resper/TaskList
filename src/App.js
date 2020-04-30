@@ -20,6 +20,7 @@ class App extends React.Component {
                 name: "",
                 status: -1,
             },
+            keyword: "",
         };
     }
 
@@ -186,8 +187,15 @@ class App extends React.Component {
         });
     };
 
+    // search
+    onSearch = (keyword) => {
+        this.setState({
+            keyword: keyword,
+        });
+    };
+
     render() {
-        var { tasks, isDisplayForm, taskEditing, filter } = this.state; // var tasks = this.state.tasks
+        var { tasks, isDisplayForm, taskEditing, filter, keyword } = this.state; // var tasks = this.state.tasks
 
         // filter
         if (filter) {
@@ -209,6 +217,12 @@ class App extends React.Component {
             });
         }
 
+        // find
+        if (keyword) {
+            tasks = tasks.filter((task) => {
+                return task.name.toLowerCase().indexOf(keyword) !== -1;
+            });
+        }
         //Condition for display Task Form
         var elementTaskForm = isDisplayForm ? (
             <TaskForm
@@ -247,7 +261,7 @@ class App extends React.Component {
                             <span>Add new work</span>
                         </button>
 
-                        <Control />
+                        <Control onSearch={this.onSearch} />
 
                         <TaskList
                             tasks={tasks}

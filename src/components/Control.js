@@ -7,7 +7,7 @@ class Control extends React.Component {
         return (
             <div className="w-100 d-flex mgb-20">
                 {/* Search */}
-                <Search />
+                <Search onSearch={this.props.onSearch} />
                 {/*Sort */}
                 <Sort />
             </div>
