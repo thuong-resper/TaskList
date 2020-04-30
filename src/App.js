@@ -16,6 +16,10 @@ class App extends React.Component {
             tasks: [],
             isDisplayForm: false,
             taskEditing: null,
+            filter: {
+                name: "",
+                status: -1,
+            },
         };
     }
 
@@ -171,8 +175,39 @@ class App extends React.Component {
         this.onShowForm();
     };
 
+    // filter work
+    onFilter = (filterName, filterStatus) => {
+        filterStatus = +filterStatus; //convert string to number
+        this.setState({
+            filter: {
+                name: filterName.toLowerCase(),
+                status: filterStatus,
+            },
+        });
+    };
+
     render() {
-        var { tasks, isDisplayForm, taskEditing } = this.state; // var tasks = this.state.tasks
+        var { tasks, isDisplayForm, taskEditing, filter } = this.state; // var tasks = this.state.tasks
+
+        // filter
+        if (filter) {
+            // filter exist
+            // filter by name
+            if (filter.name) {
+                tasks = tasks.filter((task) => {
+                    return task.name.toLowerCase().indexOf(filter.name) !== -1;
+                });
+            }
+            // filter by status
+            tasks = tasks.filter((task) => {
+                if (filter.status === -1) {
+                    //default: return all work
+                    return task;
+                } else {
+                    return task.status === (filter.status === 1 ? false : true);
+                }
+            });
+        }
 
         //Condition for display Task Form
         var elementTaskForm = isDisplayForm ? (
@@ -220,6 +255,7 @@ class App extends React.Component {
                             onUpdateStatus={this.onUpdateStatus}
                             onDelete={this.onDelete}
                             onUpdate={this.onUpdate}
+                            onFilter={this.onFilter}
                         />
                     </div>
                 </div>

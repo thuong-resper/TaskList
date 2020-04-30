@@ -3,8 +3,30 @@ import React from "react";
 import TaskItem from "./TaskItem";
 
 class TaskList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            filterName: "",
+            filterStatus: -1, // -1: all (default), 1: active, 0: de-active
+        };
+    }
+
+    onChange = (e) => {
+        let target = e.target;
+        let name = target.name;
+        let value = target.value;
+        this.props.onFilter(
+            name === "filterName" ? value : this.state.filterName, // transfer data to parent app component
+            name === "filterStatus" ? value : this.state.filterStatus
+        ); // transfer data to parent app component
+        this.setState({
+            [name]: value,
+        });
+    };
+
     render() {
         var { tasks } = this.props; //var tasks = this.props.tasks
+        let { filterName, filterStatus } = this.state;
         var elementTasks = tasks.map((task, index) => {
             return (
                 <TaskItem
@@ -38,12 +60,22 @@ class TaskList extends React.Component {
                                     className="form-control"
                                     id="formGroupExampleInput"
                                     placeholder="Example input"
+                                    name="filterName"
+                                    value={filterName}
+                                    onChange={this.onChange}
                                 />
                             </div>
                         </th>
                         <th>
-                            <select className="form-control">
-                                <option>Select</option>
+                            <select
+                                className="form-control"
+                                name="filterStatus"
+                                value={filterStatus}
+                                onChange={this.onChange}
+                            >
+                                <option value={-1}>All</option>
+                                <option value={0}>Finished</option>
+                                <option value={1}>Unfinished</option>
                             </select>
                         </th>
                         <th></th>
