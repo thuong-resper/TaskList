@@ -1,7 +1,7 @@
 import React from "react";
 
 // import TackForm from "./components/TaskForm";
-import Control from "./components/Control";
+import TaskControl from "./components/TaskControl";
 import TaskList from "./components/TaskList";
 
 import "./FontIcon/flaticon.css";
@@ -21,6 +21,10 @@ class App extends React.Component {
                 status: -1,
             },
             keyword: "",
+            sort: {
+                by: "",
+                value: 1,
+            },
         };
     }
 
@@ -194,8 +198,25 @@ class App extends React.Component {
         });
     };
 
+    // Sort
+    onSort = (value) => {
+        this.setState({
+            sort: {
+                by: value.by,
+                value: value.value,
+            },
+        });
+    };
+
     render() {
-        var { tasks, isDisplayForm, taskEditing, filter, keyword } = this.state; // var tasks = this.state.tasks
+        var {
+            tasks,
+            isDisplayForm,
+            taskEditing,
+            filter,
+            keyword,
+            sort,
+        } = this.state; // var tasks = this.state.tasks
 
         // filter
         if (filter) {
@@ -233,6 +254,21 @@ class App extends React.Component {
         ) : (
             ""
         );
+
+        //sort
+        if (sort.by === "name") {
+            tasks.sort((a, b) => {
+                if (a.name > b.name) return sort.value;
+                else if (a.name < b.name) return -sort.value;
+                else return 0;
+            });
+        } else if (sort.by === "status") {
+            tasks.sort((a, b) => {
+                if (a.status > b.status) return -sort.value;
+                else if (a.status < b.status) return sort.value;
+                else return 0;
+            });
+        }
         return (
             <div className="container">
                 <div className="row">
@@ -261,7 +297,10 @@ class App extends React.Component {
                             <span>Add new work</span>
                         </button>
 
-                        <Control onSearch={this.onSearch} />
+                        <TaskControl
+                            onSearch={this.onSearch}
+                            onSort={this.onSort}
+                        />
 
                         <TaskList
                             tasks={tasks}

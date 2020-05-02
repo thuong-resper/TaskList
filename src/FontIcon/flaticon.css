@@ -1,6 +1,6 @@
 /*
   	Flaticon icon font: Flaticon
-  	Creation date: 23/04/2020 04:45
+  	Creation date: 02/05/2020 00:04
   	*/
 
 @font-face {
@@ -53,4 +53,10 @@
 }
 .flaticon-cancel:before {
     content: "\f107";
+}
+.flaticon-tick:before {
+    content: "\f108";
+}
+.flaticon-cross-out:before {
+    content: "\f109";
 }

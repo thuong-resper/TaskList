@@ -20,6 +20,9 @@ body {
 .mgb-0 {
     margin-bottom: 0;
 }
+.mgl-10 {
+    margin-left: 10px;
+}
 
 .set1 {
     background-color: #f2f3f5;
@@ -64,6 +67,9 @@ h2 {
 }
 .mgr-10 {
     margin-right: 10px;
+}
+.mgr-5 {
+    margin-right: 5px;
 }
 .mw-500 {
     max-width: 500px;
@@ -222,3 +228,18 @@ th:nth-child(4) {
         transform: translateX(50%);
     }
 } */
+
+.sort_selected::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    background-color: aqua;
+}
+.tick::after {
+    content: "\f108";
+    float: right;
+    font-family: Flaticon;
+}
+.dropdown-menu span {
+    padding: 0;
+}

@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 23/04/2020 04:45
+    Creation date: 02/05/2020 00:04
     */
 
     @font-face {
@@ -45,6 +45,8 @@
 .flaticon-rubbish:before { content: "\f105"; }
 .flaticon-edit:before { content: "\f106"; }
 .flaticon-cancel:before { content: "\f107"; }
+.flaticon-tick:before { content: "\f108"; }
+.flaticon-cross-out:before { content: "\f109"; }
     
     $font-Flaticon-add-1: "\f100";
     $font-Flaticon-search: "\f101";
@@ -54,3 +56,5 @@
     $font-Flaticon-rubbish: "\f105";
     $font-Flaticon-edit: "\f106";
     $font-Flaticon-cancel: "\f107";
+    $font-Flaticon-tick: "\f108";
+    $font-Flaticon-cross-out: "\f109";
