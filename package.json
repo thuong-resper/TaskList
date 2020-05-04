@@ -1,6 +1,6 @@
 {
-    "homepage": "http://thuong-resper.github.io/ToDoList",
-    "name": "ToDoList",
+    "homepage": "http://thuong-resper.github.io/TaskList",
+    "name": "TaskList",
     "version": "0.1.0",
     "private": true,
     "engines": {
