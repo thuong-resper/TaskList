@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/TaskList/static/css/main.f8318501.chunk.css",
+    "main.js": "/TaskList/static/js/main.f701bfed.chunk.js",
+    "main.js.map": "/TaskList/static/js/main.f701bfed.chunk.js.map",
+    "runtime-main.js": "/TaskList/static/js/runtime-main.285ab799.js",
+    "runtime-main.js.map": "/TaskList/static/js/runtime-main.285ab799.js.map",
+    "static/js/2.0b60f248.chunk.js": "/TaskList/static/js/2.0b60f248.chunk.js",
+    "static/js/2.0b60f248.chunk.js.map": "/TaskList/static/js/2.0b60f248.chunk.js.map",
+    "index.html": "/TaskList/index.html",
+    "precache-manifest.8eead787514736c4519a34dbf2e50df0.js": "/TaskList/precache-manifest.8eead787514736c4519a34dbf2e50df0.js",
+    "service-worker.js": "/TaskList/service-worker.js",
+    "static/css/main.f8318501.chunk.css.map": "/TaskList/static/css/main.f8318501.chunk.css.map",
+    "static/js/2.0b60f248.chunk.js.LICENSE.txt": "/TaskList/static/js/2.0b60f248.chunk.js.LICENSE.txt",
+    "static/media/flaticon.css": "/TaskList/static/media/Flaticon.7b7b1171.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.285ab799.js",
+    "static/js/2.0b60f248.chunk.js",
+    "static/css/main.f8318501.chunk.css",
+    "static/js/main.f701bfed.chunk.js"
+  ]
+}
