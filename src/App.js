@@ -3,11 +3,13 @@ import React from "react";
 // import TackForm from "./components/TaskForm";
 import TaskControl from "./components/TaskControl";
 import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
 
 import "./FontIcon/flaticon.css";
 
 import "./App.css";
-import TaskForm from "./components/TaskForm";
+
+import { Container, Row, Col, Button } from "reactstrap";
 
 class App extends React.Component {
     constructor(props) {
@@ -270,32 +272,33 @@ class App extends React.Component {
             });
         }
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
+            <Container>
+                <Row>
+                    <Col lg="12">
                         <h1 className="work_title text-center">
                             Work Management
                         </h1>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
 
                 {/* Control has Search and Sort */}
 
-                <div className="row mgt-30">
+                <Row className="mgt-30">
                     {/* Task Form */}
-                    <div className={isDisplayForm ? "col-lg-4 bg tran-5" : ""}>
+                    <Col lg={isDisplayForm ? "4 bg tran-5" : ""}>
                         {elementTaskForm}
-                    </div>
+                    </Col>
                     {/* Task List */}
-                    <div className={isDisplayForm ? "col-lg-8" : "col-lg-12"}>
-                        <button
+                    <Col lg={isDisplayForm ? "8" : "12"}>
+                        <Button
+                            color="info"
                             type="button"
-                            className="btn btn-info mgb-20 mgr-10"
+                            className="mgb-20 mgr-10"
                             onClick={this.toggleForm}
                         >
                             <span className="flaticon-add-1 flaticon"></span>
                             <span>Add new work</span>
-                        </button>
+                        </Button>
 
                         <TaskControl
                             onSearch={this.onSearch}
@@ -310,9 +313,9 @@ class App extends React.Component {
                             onUpdate={this.onUpdate}
                             onFilter={this.onFilter}
                         />
-                    </div>
-                </div>
-            </div>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }

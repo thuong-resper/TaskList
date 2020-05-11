@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+
 class TaskForm extends React.Component {
     constructor(props) {
         super(props);
@@ -90,44 +92,46 @@ class TaskForm extends React.Component {
                         onClick={this.onCloseForm}
                     ></span>
                 </div>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="Input">Action</label>
-                        <input
+                <Form onSubmit={this.onSubmit}>
+                    <FormGroup>
+                        <Label for="Input">Action</Label>
+                        <Input
                             type="text"
-                            className="form-control"
                             id="Input"
                             placeholder="What will you do?"
                             name="name"
                             value={this.state.name}
                             onChange={this.onChange}
                         />
-                    </div>
-                    <label htmlFor="formGroupExampleInput">Status</label>
-                    <select
-                        className="form-control"
-                        name="status"
-                        value={this.state.status}
-                        onChange={this.onChange}
-                    >
-                        <option value={true}>Finished</option>
-                        <option value={false}>UnFinished</option>
-                    </select>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="exampleSelect">Status</Label>
+                        <Input
+                            type="select"
+                            name="status"
+                            id="exampleSelect"
+                            value={this.state.status}
+                            onChange={this.onChange}
+                        >
+                            <option value={true}>Finished</option>
+                            <option value={false}>UnFinished</option>
+                        </Input>
+                    </FormGroup>
                     <div className="btn-save">
-                        <button type="submit" className="btn btn-info">
+                        <Button type="submit" color="info">
                             <span className="flaticon-add-1 flaticon" />
                             <span>Save</span>
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             type="button"
-                            className="btn btn-danger"
+                            color="danger"
                             onClick={this.onClear}
                         >
                             <span className="flaticon-cancel flaticon" />
                             <span>Remove</span>
-                        </button>
+                        </Button>
                     </div>
-                </form>
+                </Form>
             </div>
         );
     }

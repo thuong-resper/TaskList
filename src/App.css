@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #f2f3f5;
+    background-color: #f2f3f5 !important;
 }
 .container .pdt {
     padding-top: 30px;
@@ -80,7 +80,9 @@ h2 {
 .pd-0 {
     padding: 0;
 }
-
+.d-flex {
+    display: flex;
+}
 .ovh {
     overflow: hidden;
 }
