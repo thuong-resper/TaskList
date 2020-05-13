@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Button } from "reactstrap";
+
 class TaskItem extends React.Component {
     //Update status
     onUpdateStatus = () => {
@@ -20,40 +22,37 @@ class TaskItem extends React.Component {
         var { task, index } = this.props;
         return (
             <tr>
-                <th scope="row">{index}</th>
+                <th>{index}</th>
                 <th>{task.name}</th>
                 <th>
-                    <button
+                    <Button
                         type="button"
-                        className={
-                            task.status === true
-                                ? "btnTable btn btn-danger"
-                                : "btnTable btn btn-info"
-                        }
+                        color={task.status === true ? "danger" : "info"}
+                        className="btnTable"
                         onClick={this.onUpdateStatus}
                     >
                         {task.status === true ? "Finished" : "Unfinished"}
-                    </button>
+                    </Button>
                 </th>
                 <th>
                     {" "}
                     <div className="tableIcon">
-                        <button
+                        <Button
                             type="button"
-                            className="btn btn-info"
+                            color="info"
                             title="Edit"
                             onClick={this.onUpdate}
                         >
                             <span className="flaticon-edit flaticon"></span>
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                             type="button"
-                            className="btn btn-danger"
+                            color="danger"
                             title="Delete"
                             onClick={this.onDelete}
                         >
                             <span className="flaticon-cancel flaticon"></span>
-                        </button>
+                        </Button>
                     </div>
                 </th>
             </tr>

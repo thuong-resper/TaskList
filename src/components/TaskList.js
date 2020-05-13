@@ -2,6 +2,9 @@ import React from "react";
 
 import TaskItem from "./TaskItem";
 
+import { Table } from "reactstrap";
+import { FormGroup, Input } from "reactstrap";
+
 class TaskList extends React.Component {
     constructor(props) {
         super(props);
@@ -41,49 +44,50 @@ class TaskList extends React.Component {
         });
 
         return (
-            <table className="table ovh bg">
+            <Table className="ovh bg">
                 <thead>
                     <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Work</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th>STT</th>
+                        <th>Work</th>
+                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row" />
-                        <th>
-                            <div className="form-group mgb-0">
-                                <input
+                        <th></th>
+                        <td>
+                            <FormGroup>
+                                <Input
                                     type="text"
-                                    className="form-control"
+                                    name="filterName"
                                     id="formGroupExampleInput"
                                     placeholder="Example input"
-                                    name="filterName"
                                     value={filterName}
                                     onChange={this.onChange}
                                 />
-                            </div>
-                        </th>
-                        <th>
-                            <select
-                                className="form-control"
-                                name="filterStatus"
-                                value={filterStatus}
-                                onChange={this.onChange}
-                            >
-                                <option value={-1}>All</option>
-                                <option value={0}>Finished</option>
-                                <option value={1}>Unfinished</option>
-                            </select>
-                        </th>
-                        <th></th>
+                            </FormGroup>
+                        </td>
+                        <td>
+                            <FormGroup>
+                                <Input
+                                    name="filterStatus"
+                                    value={filterStatus}
+                                    onChange={this.onChange}
+                                    type="select"
+                                    id="exampleSelect"
+                                >
+                                    <option value={-1}>All</option>
+                                    <option value={0}>Finished</option>
+                                    <option value={1}>Unfinished</option>
+                                </Input>
+                            </FormGroup>
+                        </td>
+                        <td></td>
                     </tr>
-                    {/* Tasks Item */}
                     {elementTasks}
                 </tbody>
-            </table>
+            </Table>
         );
     }
 }
