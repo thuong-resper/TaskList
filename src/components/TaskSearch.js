@@ -1,5 +1,7 @@
 import React from "react";
 
+import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
+
 class TaskSearch extends React.Component {
     constructor(props) {
         super(props);
@@ -24,10 +26,9 @@ class TaskSearch extends React.Component {
     render() {
         let { keyword } = this.state;
         return (
-            <div className="input-group mw-500 mgr-10">
-                <input
+            <InputGroup className="mw-500 mgr-10">
+                <Input
                     type="text"
-                    className="form-control"
                     placeholder="Search"
                     aria-label="Recipient's username"
                     aria-describedby="basic-addon2"
@@ -35,17 +36,13 @@ class TaskSearch extends React.Component {
                     value={keyword}
                     onChange={this.onChange}
                 />
-                <div className="input-group-append">
-                    <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={this.onSearch}
-                    >
+                <InputGroupAddon addonType="prepend">
+                    <Button type="button" color="info" onClick={this.onSearch}>
                         <span className="flaticon-search flaticon" />
                         <span>Search</span>
-                    </button>
-                </div>
-            </div>
+                    </Button>
+                </InputGroupAddon>
+            </InputGroup>
         );
     }
 }

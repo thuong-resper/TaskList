@@ -1,5 +1,12 @@
 import React from "react";
 
+import {
+    ButtonDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+} from "reactstrap";
+
 class TaskSort extends React.Component {
     constructor(props) {
         super(props);
@@ -22,90 +29,91 @@ class TaskSort extends React.Component {
         });
         this.props.onSort(this.state.sort);
     };
-
     render() {
         let { sort } = this.state;
         return (
-            <div className="btn-group">
-                <button
-                    type="button"
-                    className="btn btn-danger dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                >
-                    <span className="mgr-5">Sort</span>
-                </button>
-                <div className="dropdown-menu">
-                    <a
-                        className="dropdown-item flaticon-sort-down"
-                        href="/#"
-                        onClick={() => {
-                            this.onClick("name", 1); //insert data
-                        }}
+            <div>
+                <div className="btn-group">
+                    <button
+                        type="button"
+                        className="btn btn-danger dropdown-toggle"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
                     >
-                        <span
-                            className={
-                                sort.by === "name" && sort.value === 1
-                                    ? "tick mgl-10"
-                                    : "mgl-10"
-                            }
+                        <span className="mgr-5">Sort</span>
+                    </button>
+                    <div className="dropdown-menu">
+                        <a
+                            className="dropdown-item flaticon-sort-down"
+                            href="/#"
+                            onClick={() => {
+                                this.onClick("name", 1); //insert data
+                            }}
                         >
-                            A - Z
-                        </span>
-                    </a>
-                    <a
-                        className="dropdown-item flaticon-sort-ascending"
-                        href="/#"
-                        onClick={() => {
-                            this.onClick("name", -1); //insert data
-                        }}
-                    >
-                        <span
-                            className={
-                                sort.by === "name" && sort.value === -1
-                                    ? "tick mgl-10"
-                                    : "mgl-10"
-                            }
+                            <span
+                                className={
+                                    sort.by === "name" && sort.value === 1
+                                        ? "tick mgl-10"
+                                        : "mgl-10"
+                                }
+                            >
+                                A - Z
+                            </span>
+                        </a>
+                        <a
+                            className="dropdown-item flaticon-sort-ascending"
+                            href="/#"
+                            onClick={() => {
+                                this.onClick("name", -1); //insert data
+                            }}
                         >
-                            Z - A
-                        </span>
-                    </a>
-                    <div className="dropdown-divider" />
-                    <a
-                        className="dropdown-item"
-                        href="/#"
-                        onClick={() => {
-                            this.onClick("status", 1); //insert data
-                        }}
-                    >
-                        <span
-                            className={
-                                sort.by === "status" && sort.value === 1
-                                    ? "tick"
-                                    : ""
-                            }
+                            <span
+                                className={
+                                    sort.by === "name" && sort.value === -1
+                                        ? "tick mgl-10"
+                                        : "mgl-10"
+                                }
+                            >
+                                Z - A
+                            </span>
+                        </a>
+                        <div className="dropdown-divider" />
+                        <a
+                            className="dropdown-item"
+                            href="/#"
+                            onClick={() => {
+                                this.onClick("status", 1); //insert data
+                            }}
                         >
-                            Finished
-                        </span>
-                    </a>
-                    <a
-                        className="dropdown-item"
-                        href="/#"
-                        onClick={() => {
-                            this.onClick("status", -1); //insert data
-                        }}
-                    >
-                        <span
-                            className={
-                                sort.by === "status" && sort.value === -1
-                                    ? "tick"
-                                    : ""
-                            }
+                            <span
+                                className={
+                                    sort.by === "status" && sort.value === 1
+                                        ? "tick"
+                                        : ""
+                                }
+                            >
+                                Finished
+                            </span>
+                        </a>
+                        <a
+                            className="dropdown-item"
+                            href="/#"
+                            onClick={() => {
+                                this.onClick("status", -1); //insert data
+                            }}
                         >
-                            Unfinished
-                        </span>
-                    </a>
+                            <span
+                                className={
+                                    sort.by === "status" && sort.value === -1
+                                        ? "tick"
+                                        : ""
+                                }
+                            >
+                                Unfinished
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         );
