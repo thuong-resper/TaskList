@@ -83,6 +83,9 @@ h2 {
 .d-flex {
     display: flex;
 }
+.fw-500 {
+    font-weight: 500 !important;
+}
 .ovh {
     overflow: hidden;
 }

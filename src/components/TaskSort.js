@@ -15,6 +15,7 @@ class TaskSort extends React.Component {
                 by: "",
                 value: 1,
             },
+            dropdownOpen: false,
         };
     }
 
@@ -29,24 +30,32 @@ class TaskSort extends React.Component {
         });
         this.props.onSort(this.state.sort);
     };
+
+    toggle = () => {
+        this.setState((prevState) => ({
+            dropdownOpen: !prevState.dropdownOpen,
+        }));
+    };
+
     render() {
         let { sort } = this.state;
         return (
             <div>
-                <div className="btn-group">
-                    <button
+                <ButtonDropdown
+                    isOpen={this.state.dropdownOpen}
+                    toggle={this.toggle}
+                >
+                    <DropdownToggle
+                        caret
+                        className="mgr-5 fw-500"
+                        color="danger"
                         type="button"
-                        className="btn btn-danger dropdown-toggle"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
                     >
-                        <span className="mgr-5">Sort</span>
-                    </button>
-                    <div className="dropdown-menu">
-                        <a
-                            className="dropdown-item flaticon-sort-down"
-                            href="/#"
+                        SORT
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem
+                            className="flaticon-sort-down"
                             onClick={() => {
                                 this.onClick("name", 1); //insert data
                             }}
@@ -60,10 +69,9 @@ class TaskSort extends React.Component {
                             >
                                 A - Z
                             </span>
-                        </a>
-                        <a
-                            className="dropdown-item flaticon-sort-ascending"
-                            href="/#"
+                        </DropdownItem>
+                        <DropdownItem
+                            className="flaticon-sort-ascending"
                             onClick={() => {
                                 this.onClick("name", -1); //insert data
                             }}
@@ -77,11 +85,9 @@ class TaskSort extends React.Component {
                             >
                                 Z - A
                             </span>
-                        </a>
-                        <div className="dropdown-divider" />
-                        <a
-                            className="dropdown-item"
-                            href="/#"
+                        </DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem
                             onClick={() => {
                                 this.onClick("status", 1); //insert data
                             }}
@@ -95,10 +101,8 @@ class TaskSort extends React.Component {
                             >
                                 Finished
                             </span>
-                        </a>
-                        <a
-                            className="dropdown-item"
-                            href="/#"
+                        </DropdownItem>
+                        <DropdownItem
                             onClick={() => {
                                 this.onClick("status", -1); //insert data
                             }}
@@ -112,9 +116,9 @@ class TaskSort extends React.Component {
                             >
                                 Unfinished
                             </span>
-                        </a>
-                    </div>
-                </div>
+                        </DropdownItem>
+                    </DropdownMenu>
+                </ButtonDropdown>
             </div>
         );
     }
