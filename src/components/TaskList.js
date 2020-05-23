@@ -1,5 +1,7 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
 import TaskItem from "./TaskItem";
 
 import { Table } from "reactstrap";
@@ -92,4 +94,10 @@ class TaskList extends React.Component {
     }
 }
 
-export default TaskList;
+const mapStateToProps = (state) => {
+    return {
+        tasks: state.tasks,
+    };
+};
+
+export default connect(mapStateToProps, null)(TaskList);

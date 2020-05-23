@@ -15,7 +15,6 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks: [],
             isDisplayForm: false,
             taskEditing: null,
             filter: {
@@ -30,31 +29,14 @@ class App extends React.Component {
         };
     }
 
-    componentDidMount() {
-        if (localStorage && localStorage.getItem("tasks")) {
-            var tasks = JSON.parse(localStorage.getItem("tasks"));
-            this.setState({ tasks: tasks }); //state is an object
-        }
-    }
+    // componentDidMount() {
+    //     if (localStorage && localStorage.getItem("tasks")) {
+    //         var tasks = JSON.parse(localStorage.getItem("tasks"));
+    //         this.setState({ tasks: tasks }); //state is an object
+    //     }
+    // }
 
-    // create unique id by native way
-    id() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-    generateId() {
-        return (
-            this.id() +
-            this.id() +
-            "-" +
-            this.id() +
-            "-" +
-            this.id() +
-            "-" +
-            this.id()
-        );
-    }
+   
     //toggle display form
     toggleForm = () => {
         if (this.state.isDisplayForm && this.state.taskEditing !== null) {
@@ -212,40 +194,39 @@ class App extends React.Component {
 
     render() {
         var {
-            tasks,
             isDisplayForm,
             taskEditing,
-            filter,
-            keyword,
-            sort,
+            // filter,
+            // keyword,
+            // sort,
         } = this.state; // var tasks = this.state.tasks
 
         // filter
-        if (filter) {
-            // filter exist
-            // filter by name
-            if (filter.name) {
-                tasks = tasks.filter((task) => {
-                    return task.name.toLowerCase().indexOf(filter.name) !== -1;
-                });
-            }
-            // filter by status
-            tasks = tasks.filter((task) => {
-                if (filter.status === -1) {
-                    //default: return all work
-                    return task;
-                } else {
-                    return task.status === (filter.status === 1 ? false : true);
-                }
-            });
-        }
+        // if (filter) {
+        //     // filter exist
+        //     // filter by name
+        //     if (filter.name) {
+        //         tasks = tasks.filter((task) => {
+        //             return task.name.toLowerCase().indexOf(filter.name) !== -1;
+        //         });
+        //     }
+        //     // filter by status
+        //     tasks = tasks.filter((task) => {
+        //         if (filter.status === -1) {
+        //             //default: return all work
+        //             return task;
+        //         } else {
+        //             return task.status === (filter.status === 1 ? false : true);
+        //         }
+        //     });
+        // }
 
         // find
-        if (keyword) {
-            tasks = tasks.filter((task) => {
-                return task.name.toLowerCase().indexOf(keyword) !== -1;
-            });
-        }
+        // if (keyword) {
+        //     tasks = tasks.filter((task) => {
+        //         return task.name.toLowerCase().indexOf(keyword) !== -1;
+        //     });
+        // }
         //Condition for display Task Form
         var elementTaskForm = isDisplayForm ? (
             <TaskForm
@@ -258,19 +239,19 @@ class App extends React.Component {
         );
 
         //sort
-        if (sort.by === "name") {
-            tasks.sort((a, b) => {
-                if (a.name > b.name) return sort.value;
-                else if (a.name < b.name) return -sort.value;
-                else return 0;
-            });
-        } else if (sort.by === "status") {
-            tasks.sort((a, b) => {
-                if (a.status > b.status) return -sort.value;
-                else if (a.status < b.status) return sort.value;
-                else return 0;
-            });
-        }
+        // if (sort.by === "name") {
+        //     tasks.sort((a, b) => {
+        //         if (a.name > b.name) return sort.value;
+        //         else if (a.name < b.name) return -sort.value;
+        //         else return 0;
+        //     });
+        // } else if (sort.by === "status") {
+        //     tasks.sort((a, b) => {
+        //         if (a.status > b.status) return -sort.value;
+        //         else if (a.status < b.status) return sort.value;
+        //         else return 0;
+        //     });
+        // }
         return (
             <Container>
                 <Row>
@@ -306,7 +287,6 @@ class App extends React.Component {
                         />
 
                         <TaskList
-                            tasks={tasks}
                             // isDisplayForm={isDisplayForm}
                             onUpdateStatus={this.onUpdateStatus}
                             onDelete={this.onDelete}

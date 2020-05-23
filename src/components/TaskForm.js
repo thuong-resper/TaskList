@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../actions/index";
 
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
@@ -65,8 +67,11 @@ class TaskForm extends React.Component {
     onSubmit = (event) => {
         event.preventDefault(); //delete default submit
 
+        // this.props.onSubmit(this.state);
         //receive props from app.js
-        this.props.onSubmit(this.state);
+
+        this.props.onAddTask(this.state);
+        //receive props from store
 
         // clear data when click submit (submit done) and close form
         this.onClear();
@@ -137,4 +142,15 @@ class TaskForm extends React.Component {
     }
 }
 
-export default TaskForm;
+const mapStateToProps = (state) => {
+    return {};
+};
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onAddTask: (task) => {
+            dispatch(actions.addTask(task));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskForm);
