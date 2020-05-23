@@ -1,6 +1,7 @@
 import React from "react";
 
-// import TackForm from "./components/TaskForm";
+import { connect } from "react-redux";
+import * as actions from "./actions/index";
 import TaskControl from "./components/TaskControl";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
@@ -15,7 +16,6 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isDisplayForm: false,
             taskEditing: null,
             filter: {
                 name: "",
@@ -36,27 +36,20 @@ class App extends React.Component {
     //     }
     // }
 
-   
     //toggle display form
     toggleForm = () => {
-        if (this.state.isDisplayForm && this.state.taskEditing !== null) {
-            this.setState({
-                isDisplayForm: true,
-                taskEditing: null,
-            });
-        } else {
-            this.setState({
-                isDisplayForm: !this.state.isDisplayForm,
-                taskEditing: null,
-            });
-        }
-    };
-
-    //close form when click icon close button
-    onCloseForm = () => {
-        this.setState({
-            isDisplayForm: false,
-        });
+        // if (this.state.isDisplayForm && this.state.taskEditing !== null) {
+        //     this.setState({
+        //         isDisplayForm: true,
+        //         taskEditing: null,
+        //     });
+        // } else {
+        //     this.setState({
+        //         isDisplayForm: !this.state.isDisplayForm,
+        //         taskEditing: null,
+        //     });
+        // }
+        this.props.onToggleForm();
     };
 
     onShowForm = () => {
@@ -65,23 +58,23 @@ class App extends React.Component {
         });
     };
 
-    onSubmit = (data) => {
-        let { tasks } = this.state; // let tasks = this.state.tasks
-        if (data.id === "") {
-            //Add and save new work
-            data.id = this.generateId();
-            tasks.push(data);
-        } else {
-            let index = this.findIndex(data.id);
-            tasks[index] = data;
-        }
+    // onSubmit = (data) => {
+    //     let { tasks } = this.state; // let tasks = this.state.tasks
+    //     if (data.id === "") {
+    //         //Add and save new work
+    //         data.id = this.generateId();
+    //         tasks.push(data);
+    //     } else {
+    //         let index = this.findIndex(data.id);
+    //         tasks[index] = data;
+    //     }
 
-        this.setState({
-            tasks: tasks,
-            taskEditing: null,
-        });
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    };
+    //     this.setState({
+    //         tasks: tasks,
+    //         taskEditing: null,
+    //     });
+    //     localStorage.setItem("tasks", JSON.stringify(tasks));
+    // };
 
     // Update Status
     onUpdateStatus = (id) => {
@@ -194,13 +187,13 @@ class App extends React.Component {
 
     render() {
         var {
-            isDisplayForm,
             taskEditing,
             // filter,
             // keyword,
             // sort,
         } = this.state; // var tasks = this.state.tasks
 
+        let { isDisplayForm } = this.props;
         // filter
         // if (filter) {
         //     // filter exist
@@ -229,11 +222,7 @@ class App extends React.Component {
         // }
         //Condition for display Task Form
         var elementTaskForm = isDisplayForm ? (
-            <TaskForm
-                onCloseForm={this.onCloseForm}
-                onSubmit={this.onSubmit}
-                task={taskEditing}
-            />
+            <TaskForm task={taskEditing} />
         ) : (
             ""
         );
@@ -300,4 +289,18 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        isDisplayForm: state.isDisplayForm,
+    };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onToggleForm: () => {
+            dispatch(actions.toggleForm());
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
