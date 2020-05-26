@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from "../actions/index";
 
 import { Button } from "reactstrap";
 
@@ -60,4 +62,16 @@ class TaskItem extends React.Component {
     }
 }
 
-export default TaskItem;
+const mapStateToProps = (state) => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onUpdateStatus: (id) => {
+            dispatch(actions.updateStatus(id));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskItem);
