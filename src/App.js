@@ -119,30 +119,6 @@ class App extends React.Component {
         return result;
     };
 
-    // Delete Work and close form
-    onDelete = (id) => {
-        const { tasks } = this.state;
-
-        //1st way
-        // let filterResult = tasks.filter((task) => task.id !== id);
-        // this.setState({
-        //     tasks: filterResult,
-        // });
-        // localStorage.setItem("tasks", JSON.stringify(filterResult));
-        // this.onCloseForm();
-
-        // 2nd way
-        let index = this.findIndex(id);
-        if (index !== -1) {
-            tasks.splice(index, 1);
-            this.setState({
-                tasks: tasks,
-            });
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
-        this.onCloseForm();
-    };
-
     // Update work
     onUpdate = (id) => {
         const { tasks } = this.state;
@@ -278,7 +254,6 @@ class App extends React.Component {
                         <TaskList
                             // isDisplayForm={isDisplayForm}
                             onUpdateStatus={this.onUpdateStatus}
-                            onDelete={this.onDelete}
                             onUpdate={this.onUpdate}
                             onFilter={this.onFilter}
                         />

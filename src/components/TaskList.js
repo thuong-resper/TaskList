@@ -38,7 +38,6 @@ class TaskList extends React.Component {
                     key={task.id}
                     index={index + 1}
                     task={task}
-                    onDelete={this.props.onDelete}
                     onUpdate={this.props.onUpdate}
                 />
             );
