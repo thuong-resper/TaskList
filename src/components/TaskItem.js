@@ -17,8 +17,9 @@ class TaskItem extends React.Component {
     };
 
     //Update work
-    onUpdate = () => {
-        this.props.onUpdate(this.props.task.id);
+    onEditTask = () => {
+        this.props.onOpenForm();
+        this.props.onEditTask(this.props.task);
     };
 
     render() {
@@ -44,7 +45,7 @@ class TaskItem extends React.Component {
                             type="button"
                             color="info"
                             title="Edit"
-                            onClick={this.onUpdate}
+                            onClick={this.onEditTask}
                         >
                             <span className="flaticon-edit flaticon"></span>
                         </Button>
@@ -77,6 +78,12 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onCloseForm: () => {
             dispatch(actions.closeForm());
+        },
+        onOpenForm: () => {
+            dispatch(actions.openForm());
+        },
+        onEditTask: (task) => {
+            dispatch(actions.editTask(task));
         },
     };
 };

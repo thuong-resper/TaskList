@@ -16,7 +16,6 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            taskEditing: null,
             filter: {
                 name: "",
                 status: -1,
@@ -38,18 +37,17 @@ class App extends React.Component {
 
     //toggle display form
     toggleForm = () => {
-        // if (this.state.isDisplayForm && this.state.taskEditing !== null) {
-        //     this.setState({
-        //         isDisplayForm: true,
-        //         taskEditing: null,
-        //     });
-        // } else {
-        //     this.setState({
-        //         isDisplayForm: !this.state.isDisplayForm,
-        //         taskEditing: null,
-        //     });
-        // }
-        this.props.onToggleForm();
+        let { itemEditing } = this.props;
+        if (itemEditing && itemEditing.id !== "") {
+            this.props.onOpenForm();
+        } else {
+            this.props.onToggleForm();
+        }
+        this.props.onClearTask({
+            id: "",
+            name: "",
+            status: false,
+        });
     };
 
     onShowForm = () => {
@@ -162,12 +160,11 @@ class App extends React.Component {
     };
 
     render() {
-        var {
-            taskEditing,
-            // filter,
-            // keyword,
-            // sort,
-        } = this.state; // var tasks = this.state.tasks
+        // var {
+        //     // filter,
+        //     // keyword,
+        //     // sort,
+        // } = this.state; // var tasks = this.state.tasks
 
         let { isDisplayForm } = this.props;
         // filter
@@ -196,12 +193,6 @@ class App extends React.Component {
         //         return task.name.toLowerCase().indexOf(keyword) !== -1;
         //     });
         // }
-        //Condition for display Task Form
-        var elementTaskForm = isDisplayForm ? (
-            <TaskForm task={taskEditing} />
-        ) : (
-            ""
-        );
 
         //sort
         // if (sort.by === "name") {
@@ -232,7 +223,7 @@ class App extends React.Component {
                 <Row className="mgt-30">
                     {/* Task Form */}
                     <Col lg={isDisplayForm ? "4 bg tran-5" : ""}>
-                        {elementTaskForm}
+                        <TaskForm />
                     </Col>
                     {/* Task List */}
                     <Col lg={isDisplayForm ? "8" : "12"}>
@@ -252,7 +243,6 @@ class App extends React.Component {
                         />
 
                         <TaskList
-                            // isDisplayForm={isDisplayForm}
                             onUpdateStatus={this.onUpdateStatus}
                             onUpdate={this.onUpdate}
                             onFilter={this.onFilter}
@@ -267,6 +257,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isDisplayForm: state.isDisplayForm,
+        itemEditing: state.itemEditing,
     };
 };
 
@@ -274,6 +265,12 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         onToggleForm: () => {
             dispatch(actions.toggleForm());
+        },
+        onClearTask: (task) => {
+            dispatch(actions.editTask(task));
+        },
+        onOpenForm: (task) => {
+            dispatch(actions.openForm(task));
         },
     };
 };
