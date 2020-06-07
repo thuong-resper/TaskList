@@ -131,17 +131,6 @@ class App extends React.Component {
         this.onShowForm();
     };
 
-    // filter work
-    onFilter = (filterName, filterStatus) => {
-        filterStatus = +filterStatus; //convert string to number
-        this.setState({
-            filter: {
-                name: filterName.toLowerCase(),
-                status: filterStatus,
-            },
-        });
-    };
-
     // search
     onSearch = (keyword) => {
         this.setState({
@@ -160,33 +149,7 @@ class App extends React.Component {
     };
 
     render() {
-        // var {
-        //     // filter,
-        //     // keyword,
-        //     // sort,
-        // } = this.state; // var tasks = this.state.tasks
-
         let { isDisplayForm } = this.props;
-        // filter
-        // if (filter) {
-        //     // filter exist
-        //     // filter by name
-        //     if (filter.name) {
-        //         tasks = tasks.filter((task) => {
-        //             return task.name.toLowerCase().indexOf(filter.name) !== -1;
-        //         });
-        //     }
-        //     // filter by status
-        //     tasks = tasks.filter((task) => {
-        //         if (filter.status === -1) {
-        //             //default: return all work
-        //             return task;
-        //         } else {
-        //             return task.status === (filter.status === 1 ? false : true);
-        //         }
-        //     });
-        // }
-
         // find
         // if (keyword) {
         //     tasks = tasks.filter((task) => {
@@ -245,7 +208,6 @@ class App extends React.Component {
                         <TaskList
                             onUpdateStatus={this.onUpdateStatus}
                             onUpdate={this.onUpdate}
-                            onFilter={this.onFilter}
                         />
                     </Col>
                 </Row>

@@ -89,6 +89,9 @@ h2 {
 .ovh {
     overflow: hidden;
 }
+.reset {
+    margin: 0 0 1rem 0 !important;
+}
 .work_title {
     width: 100%;
     padding: 20px;
