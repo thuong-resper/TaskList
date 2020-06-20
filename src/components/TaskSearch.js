@@ -1,5 +1,8 @@
 import React from "react";
 
+import { connect } from "react-redux";
+import * as actions from "../actions/index";
+
 import { InputGroup, InputGroupAddon, Input, Button } from "reactstrap";
 
 class TaskSearch extends React.Component {
@@ -47,4 +50,12 @@ class TaskSearch extends React.Component {
     }
 }
 
-export default TaskSearch;
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSearch: (keyword) => {
+            dispatch(actions.searchTask(keyword));
+        },
+    };
+};
+
+export default connect(null, mapDispatchToProps)(TaskSearch);

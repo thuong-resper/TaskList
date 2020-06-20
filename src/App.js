@@ -150,12 +150,6 @@ class App extends React.Component {
 
     render() {
         let { isDisplayForm } = this.props;
-        // find
-        // if (keyword) {
-        //     tasks = tasks.filter((task) => {
-        //         return task.name.toLowerCase().indexOf(keyword) !== -1;
-        //     });
-        // }
 
         //sort
         // if (sort.by === "name") {

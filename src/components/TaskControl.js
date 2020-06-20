@@ -7,7 +7,7 @@ class TaskControl extends React.Component {
         return (
             <div className="w-100 d-flex mgb-20">
                 {/* Search */}
-                <TaskSearch onSearch={this.props.onSearch} />
+                <TaskSearch />
                 {/*Sort */}
                 <TaskSort onSort={this.props.onSort} />
             </div>

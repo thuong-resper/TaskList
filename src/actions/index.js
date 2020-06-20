@@ -58,3 +58,10 @@ export const filterTask = (filter) => {
         filter, //contains filter by name or status
     };
 };
+
+export const searchTask = (keyword) => {
+    return {
+        type: types.SEARCH,
+        keyword,
+    };
+};
