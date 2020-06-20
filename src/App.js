@@ -13,28 +13,6 @@ import "./App.css";
 import { Container, Row, Col, Button } from "reactstrap";
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filter: {
-                name: "",
-                status: -1,
-            },
-            keyword: "",
-            sort: {
-                by: "",
-                value: 1,
-            },
-        };
-    }
-
-    // componentDidMount() {
-    //     if (localStorage && localStorage.getItem("tasks")) {
-    //         var tasks = JSON.parse(localStorage.getItem("tasks"));
-    //         this.setState({ tasks: tasks }); //state is an object
-    //     }
-    // }
-
     //toggle display form
     toggleForm = () => {
         let { itemEditing } = this.props;
@@ -50,121 +28,9 @@ class App extends React.Component {
         });
     };
 
-    onShowForm = () => {
-        this.setState({
-            isDisplayForm: true,
-        });
-    };
-
-    // onSubmit = (data) => {
-    //     let { tasks } = this.state; // let tasks = this.state.tasks
-    //     if (data.id === "") {
-    //         //Add and save new work
-    //         data.id = this.generateId();
-    //         tasks.push(data);
-    //     } else {
-    //         let index = this.findIndex(data.id);
-    //         tasks[index] = data;
-    //     }
-
-    //     this.setState({
-    //         tasks: tasks,
-    //         taskEditing: null,
-    //     });
-    //     localStorage.setItem("tasks", JSON.stringify(tasks));
-    // };
-
-    // Update Status
-    onUpdateStatus = (id) => {
-        let { tasks } = this.state;
-        // 1st way
-
-        // if (findId !== -1) {
-        //     tasks[findId].status = !tasks[findId].status;
-        //     this.setState({
-        //         tasks: tasks,
-        //     });
-        // }
-        // for (let i = 0; i < findId.length; i++) {
-        //     findId[i] = !findId[i];
-        //     // console.log(findId[i]);
-        //     this.setState({
-        //         tasks: tasks,
-        //     });
-        // }
-        // tasks[index].status = !tasks[index].status;
-        // // 2nd way
-
-        // setState and save at local storage
-        let index = this.findIndex(id);
-        if (index !== -1) {
-            tasks[index].status = !tasks[index].status;
-            this.setState({
-                tasks: tasks,
-            });
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
-    };
-
-    findIndex = (id) => {
-        let { tasks } = this.state;
-        let result = -1;
-        tasks.forEach((task, index) => {
-            if (task.id === id) {
-                result = index;
-            }
-        });
-        return result;
-    };
-
-    // Update work
-    onUpdate = (id) => {
-        const { tasks } = this.state;
-        let index = this.findIndex(id);
-        this.setState(
-            //setState is asynchronous
-            {
-                taskEditing: tasks[index],
-            }
-            //so if want receive data before do next steps, must make asynchronous to synchronous by use function
-        );
-        this.onShowForm();
-    };
-
-    // search
-    onSearch = (keyword) => {
-        this.setState({
-            keyword: keyword,
-        });
-    };
-
-    // Sort
-    onSort = (value) => {
-        this.setState({
-            sort: {
-                by: value.by,
-                value: value.value,
-            },
-        });
-    };
-
     render() {
         let { isDisplayForm } = this.props;
 
-        //sort
-        // if (sort.by === "name") {
-        //     tasks.sort((a, b) => {
-        //         if (a.name > b.name) return sort.value;
-        //         else if (a.name < b.name) return -sort.value;
-        //         else return 0;
-        //     });
-        // } else if (sort.by === "status") {
-        //     tasks.sort((a, b) => {
-        //         if (a.status > b.status) return -sort.value;
-        //         else if (a.status < b.status) return sort.value;
-        //         else return 0;
-        //     });
-        // }
         return (
             <Container>
                 <Row>
@@ -174,9 +40,6 @@ class App extends React.Component {
                         </h1>
                     </Col>
                 </Row>
-
-                {/* Control has Search and Sort */}
-
                 <Row className="mgt-30">
                     {/* Task Form */}
                     <Col lg={isDisplayForm ? "4 bg tran-5" : ""}>
@@ -194,10 +57,7 @@ class App extends React.Component {
                             <span>Add new work</span>
                         </Button>
 
-                        <TaskControl
-                            onSearch={this.onSearch}
-                            onSort={this.onSort}
-                        />
+                        <TaskControl />
 
                         <TaskList
                             onUpdateStatus={this.onUpdateStatus}

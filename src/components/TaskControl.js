@@ -9,12 +9,10 @@ class TaskControl extends React.Component {
                 {/* Search */}
                 <TaskSearch />
                 {/*Sort */}
-                <TaskSort onSort={this.props.onSort} />
+                <TaskSort />
             </div>
         );
     }
 }
 
 export default TaskControl;
-
-// fix sort and

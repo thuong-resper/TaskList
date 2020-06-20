@@ -1,5 +1,8 @@
 import React from "react";
 
+import { connect } from "react-redux";
+import * as actions from "../actions/index";
+
 import {
     ButtonDropdown,
     DropdownToggle,
@@ -20,15 +23,10 @@ class TaskSort extends React.Component {
     }
 
     onClick = async (sortBy, sortValue) => {
-        //setState is asynchronous so use asyn/await to solve it
-        await this.setState({
-            //use await word mean: program will stop this function(contain await) and not do next function. when this function done do next function
-            sort: {
-                by: sortBy,
-                value: sortValue,
-            },
+        this.props.onSort({
+            by: sortBy,
+            value: sortValue,
         });
-        this.props.onSort(this.state.sort);
     };
 
     toggle = () => {
@@ -38,7 +36,6 @@ class TaskSort extends React.Component {
     };
 
     render() {
-        let { sort } = this.state;
         return (
             <div>
                 <ButtonDropdown
@@ -62,7 +59,8 @@ class TaskSort extends React.Component {
                         >
                             <span
                                 className={
-                                    sort.by === "name" && sort.value === 1
+                                    this.props.sort.by === "name" &&
+                                    this.props.sort.value === 1
                                         ? "tick mgl-10"
                                         : "mgl-10"
                                 }
@@ -78,7 +76,8 @@ class TaskSort extends React.Component {
                         >
                             <span
                                 className={
-                                    sort.by === "name" && sort.value === -1
+                                    this.props.sort.by === "name" &&
+                                    this.props.sort.value === -1
                                         ? "tick mgl-10"
                                         : "mgl-10"
                                 }
@@ -94,7 +93,8 @@ class TaskSort extends React.Component {
                         >
                             <span
                                 className={
-                                    sort.by === "status" && sort.value === 1
+                                    this.props.sort.by === "status" &&
+                                    this.props.sort.value === 1
                                         ? "tick"
                                         : ""
                                 }
@@ -109,7 +109,8 @@ class TaskSort extends React.Component {
                         >
                             <span
                                 className={
-                                    sort.by === "status" && sort.value === -1
+                                    this.props.sort.by === "status" &&
+                                    this.props.sort.value === -1
                                         ? "tick"
                                         : ""
                                 }
@@ -124,4 +125,18 @@ class TaskSort extends React.Component {
     }
 }
 
-export default TaskSort;
+const mapStateToProps = (state) => {
+    return {
+        sort: state.sort,
+    };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        onSort: (sort) => {
+            dispatch(actions.sortTask(sort));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskSort);
